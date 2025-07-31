@@ -1,0 +1,52 @@
+<th:block th:fragment="modal-edit-emp">
+	<form id="formEditEmp" class="p-3 mb-5" th:object="${empl}" method="post">
+		<!--div class="modal fade" id="modalEditEmp" tabindex="-1" th:classappend="${modalOpened} ? 'show d-block' : ''"
+			th:attr="aria-modal=${modalOpened} ? 'true' : null" th:attrappend="role=${modalOpened} ? 'dialog' : null"
+			th:style="${modalOpened} ? 'display: block;' : ''">
+			<div class="modal-dialog"-->
+				
+		<div class="modal fade" id="modalEditEmp" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Editar empleado</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="idEmp" th:field="*{id}">
+						<div class="mb-3">
+							<label th:for="username" class="form-label">Usuario</label>
+							<input id="usernameEmp" type="text" class="form-control" th:field="*{username}"
+								aria-describedby="usernameEmp" />
+							<div class="alert alert-danger d-none" id="error-username"></div>
+						</div>
+						<div class="mb-3">
+							<label th:for="name" class="form-label">Nombre</label>
+							<input id="nameEmp" type="text" class="form-control" th:field="*{name}"
+								aria-describedby="nameEmp" />
+							<div class="alert alert-danger d-none" id="error-name"></div>
+						</div>
+						<div class="mb-3">
+							<label th:for="surname" class="form-label">Apellidos</label>
+							<input id="surnameEmp" type="text" class="form-control" th:field="*{surname}"
+								aria-describedby="surnameEmp" />
+							<div class="alert alert-danger d-none" id="error-surname"></div>
+						</div>
+						<!--div class="mb-3"><label th:for="department" class="form-label">Departamento</label>
+							<select th:field="*{idDept}" id="department">
+								<option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}">
+								</option>
+							</select>
+						<div class="alert alert-danger d-none" id="error-department"></div>
+						</div>
+					</div-->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" id="btnCloseEmp"
+								data-bs-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-primary" id="btnSaveEmp">Guardar cambios</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	</form>
+</th:block>

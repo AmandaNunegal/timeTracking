@@ -1,0 +1,93 @@
+<th:block th:fragment="modal-edit-emp-more">
+	<form id="formEditEmpMore" class="p-3 mb-5" th:object="${empl}" method="post">
+		<div class="modal" id="modalEditEmpMore" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Editar empleado</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="idEmpMore" th:field="*{id}">
+						<div class="mb-3">
+							<label for="activeEmpMore" class="form-check-label">Activo</label>
+							<input type="checkbox" th:field="*{enabled}" id="activeEmpMore" class="form-check-input"
+								aria-describedby="activeEmpMore" />
+						</div>
+						<div class="mb-3">
+							<label th:for="nameEmpMore" class="form-label">Nombre</label>
+							<input id="nameEmpMore" type="text" class="form-control" th:field="*{name}"
+								aria-describedby="nameEmpMore" />
+							<div class="alert alert-danger d-none" id="error-nameEmpMore"></div>
+						</div>
+						<div class="mb-3">
+							<label th:for="surnameEmpMore" class="form-label">Apellidos</label>
+							<input id="surnameEmpMore" type="text" class="form-control" th:field="*{surname}"
+								aria-describedby="surnameEmpMore" />
+							<div class="alert alert-danger d-none" id="error-surnameEmpMore"></div>
+						</div>
+						<div class="mb-3">
+							<label th:for="departmentEmpMore" class="form-label">Departamento</label>
+							<select class="form-select" th:field="*{idDept}" id="departmentEmpMore">
+								<option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}">
+								</option>
+							</select>
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('idDept')}"
+								th:errors="*{idDept}">
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="timeStartEmpMore" class="form-label">Hora de entrada</label>
+							<input type="time" class="form-control" th:field="*{timeStart}" id="timeStartEmpMore"
+								aria-describedby="timeStartEmpMore" />
+							<div class="alert alert-danger d-none" id="error-timeStartEmpMore"></div>
+
+						</div>
+						<div class="mb-3">
+							<label for="timeEndEmpMore" class="form-label">Hora de salida</label>
+							<input type="time" class="form-control" th:field="*{timeEnd}" id="timeEndEmpMore"
+								aria-describedby="timeEndEmpMore" />
+							<div class="alert alert-danger d-none" id="error-timeEndEmpMore"></div>
+						</div>
+						<div class="mb-3">
+							<label for="timeStartEmpMore2" class="form-label">Hora de entrada</label>
+							<input type="time" class="form-control" th:field="*{timeStart2}" id="timeStartEmpMore2"
+								aria-describedby="timeStartEmpMore2" />
+
+						</div>
+						<div class="mb-3">
+							<label for="timeEndEmpMore2" class="form-label">Hora de salida</label>
+							<input type="time" class="form-control" th:field="*{timeEnd2}" id="timeEndEmpMore2"
+								aria-describedby="timeEndEmpMore2" />
+							<div class="alert alert-danger d-none" id="error-timeStart2EmpMore"></div>
+						</div>
+						<div class="mb-3">
+							<label for="usernameEmpMore" class="form-label">Usuario</label>
+							<input type="text" class="form-control" th:field="*{username}" id="usernameEmpMore"
+								aria-describedby="usernameEmpMore" />
+							<div class="alert alert-danger d-none" id="error-timeEnd2EmpMore"></div>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Contraseña</label>
+							<input type="password" class="form-control" th:field="*{password}"
+								aria-describedby="passwordEmpMore" />
+							<div class="alert alert-danger d-none" id="error-passwordEmpMore"></div>
+						</div>
+						<div class="mb-3">
+							<label for="password2" class="form-label">Confirmar contraseña</label>
+							<input type="password" class="form-control" th:field="*{password2}"
+								aria-describedby="passwordEmpMore2" />
+							<div class="alert alert-danger d-none" id="error-password2EmpMore"></div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" id="btnCloseEmpMore"
+								data-bs-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-primary" id="btnSaveEmpMore">Guardar
+								cambios</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	</form>
+</th:block>

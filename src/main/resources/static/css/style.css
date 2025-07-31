@@ -1,0 +1,11 @@
+.form-check-input:checked {
+	accent-color: gray;
+}
+
+.form-check-input {
+	accent-color: gray;
+}
+
+body {
+background-color: red;
+}

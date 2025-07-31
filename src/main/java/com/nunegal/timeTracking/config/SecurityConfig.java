@@ -26,15 +26,12 @@ public class SecurityConfig {
 		httpSecurity.csrf(csrf -> csrf.disable())			
 			.authorizeHttpRequests(auth -> auth
 			.requestMatchers("/login", "/css/**", "/js/**").permitAll()		
-			//.requestMatchers(HttpMethod.POST, "/employees/test").permitAll()
-			.anyRequest().authenticated())
-			
+			.anyRequest().authenticated())			
 			.formLogin(form -> form
 					.loginPage("/login")
 					.loginProcessingUrl("/login")
 					.failureUrl("/login?error=true")
-					.permitAll())
-			
+					.permitAll())			
 			.logout(logout -> logout
 					.logoutUrl("/logout")
 					.logoutSuccessUrl("/login?logout=true")

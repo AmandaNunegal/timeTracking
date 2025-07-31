@@ -3,30 +3,44 @@ package com.nunegal.timeTracking.mappers;
 import java.util.List;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
 
 import com.nunegal.timeTracking.dtos.EmployeeDto;
-import com.nunegal.timeTracking.dtos.EmployeeDtoEdit;
+import com.nunegal.timeTracking.dtos.EmployeeMoreDto;
+import com.nunegal.timeTracking.dtos.EmployeeTimekeepingDto;
 import com.nunegal.timeTracking.entity.Employee;
+import com.nunegal.timeTracking.entity.Timekeeping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface EmployeeMapper {
 
-	
-	EmployeeMapper mapper = Mappers.getMapper(EmployeeMapper.class);
-	
-	
 	EmployeeDto toEmployeeDto(Employee employee);
-	
-	EmployeeDtoEdit toEmployeeDtoEdit(Employee employee);
-		
+
 	Employee toEmployee(EmployeeDto employeeDto);
+
+	@Mapping(source = "department.id", target = "idDept")
+	@Mapping(source = "department.name", target = "nameDepartment")
+	EmployeeMoreDto toEmployeeMoreDto(Employee employee);
+
+	@Mapping(target = "department", ignore = true)
+	Employee toEmployee(EmployeeMoreDto employeeMoreEditDto);
 	
-	Employee toEmployee(EmployeeDtoEdit employeeDtoEdit);
-	
+	@Mapping(source = "employee.id", target = "idEmp")
+	@Mapping(source = "employee.enabled", target = "enabledEmp")
+	@Mapping(source = "employee.name", target = "nameEmp")
+	@Mapping(source = "employee.surname", target = "surnameEmp")	
+	@Mapping(source = "timekeeping.id", target = "idTk")
+	@Mapping(source = "timekeeping.type", target = "typeTk")
+	@Mapping(source = "timekeeping.dateTime", target = "dateTimeTk")	
+	EmployeeTimekeepingDto toEmployeeTkDto(Employee employee, Timekeeping timekeeping);
+		
+	Employee employee(EmployeeTimekeepingDto employeeTimekeepingDto);
+
 	List<EmployeeDto> toListEmployeeDto(List<Employee> employees);
-	
-	List<EmployeeDtoEdit> toListEmployeeDtoEdit(List<Employee> employees);	
-	
+
 	List<Employee> toListEmployee(List<EmployeeDto> employeesDto);
+
+	List<EmployeeMoreDto> toListEmployeeMoreDto(List<Employee> employees);
+	
+
 }

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Empleados</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container p-0">
+		<div class="row justify-content-center mt-3">
+				<th:block th:insert="~{fragments/_header}"></th:block>
+		</div>
+		<div class="row">
+			<div class="row">
+				<th:block th:insert="~{fragments/_header2 :: header2('NUEVO EMPLEADO')}"></th:block>
+			</div>
+		</div>
+		<div class="row d-flex justify-content-center">
+			<div class="col-6 p-5">
+				<form class="shadow p-3 mb-5 bg-white" th:action="@{/employees/new}" th:object="${emp}" method="post">
+					<div class="mb-3">
+						<label for="active" class="form-check-label">Activo</label>
+						<input type="checkbox" th:field="*{enabled}" id="active" class="form-check-input"
+							aria-describedby="employeeActive" />
+					</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Nombre</label>
+						<input type="text" class="form-control" th:field="*{name}" aria-describedby="employeeName" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="surname" class="form-label">Apellidos</label>
+						<input type="text" class="form-control" th:field="*{surname}"
+							aria-describedby="employeeSurname" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label th:for="department" class="form-label">Departamento</label>
+						<select class="form-select" th:field="*{idDept}" id="department">
+							<option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}">
+							</option>
+						</select>
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('idDept')}" th:errors="*{idDept}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="timeStart" class="form-label">Hora de entrada</label>
+						<input type="time" class="form-control" th:field="*{timeStart}" id="timeStart"
+							aria-describedby="employeetimeStart" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('timeStart')}"
+							th:errors="*{timeStart}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="timeEnd" class="form-label">Hora de salida</label>
+						<input type="time" class="form-control" th:field="*{timeEnd}" id="timeEnd"
+							aria-describedby="employeetimeEnd" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('timeEnd')}" th:errors="*{timeEnd}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="timeStart2" class="form-label">Hora de entrada</label>
+						<input type="time" class="form-control" th:field="*{timeStart2}" id="timeStart2"
+							aria-describedby="employeetimeStart2" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('timeStart2')}"
+							th:errors="*{timeStart2}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="timeEnd2" class="form-label">Hora de salida</label>
+						<input type="time" class="form-control" th:field="*{timeEnd2}" id="timeEnd2"
+							aria-describedby="employeetimeEnd2" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('timeEnd2')}"
+							th:errors="*{timeEnd2}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Usuario</label>
+						<input type="text" class="form-control" th:field="*{username}"
+							aria-describedby="employeeUsername" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}"
+							th:errors="*{username}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label">Contraseña</label>
+						<input type="password" class="form-control" th:field="*{password}"
+							aria-describedby="employeePassword" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="password2" class="form-label">Confirmar contraseña</label>
+						<input type="password" class="form-control" th:field="*{password2}"
+							aria-describedby="employeePassword2" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('password2')}"
+							th:errors="*{password2}">
+						</div>
+					</div>
+					<div>
+						<button type="button" class="btn btn-secondary" id="btnCancelNewEmp">Cancelar</button>
+						<button class="btn btn-secondary" id="saveEmployee" name="saveEmployee"
+							type="submit">Guardar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script th:src="@{/js/script_new_employee.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

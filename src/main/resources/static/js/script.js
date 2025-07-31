@@ -4,19 +4,17 @@ function loadDataEdit(element) {
 
 	const trEmployee = element.closest('tr');
 
-	const employeeUsername = trEmployee.children[0].textContent;
-	const employeeName = trEmployee.children[1].textContent;
-	const employeeSurname = trEmployee.children[2].textContent;
+	const employeeUsername = trEmployee.children[0].textContent.trim();
+	const employeeName = trEmployee.children[1].textContent.trim();
+	const employeeSurname = trEmployee.children[2].textContent.trim();
 
-	document.getElementById("employeeUsernameModal").value = employeeUsername;
-	document.getElementById("employeeNameModal").value = employeeName;
-	document.getElementById("employeeSurnameModal").value = employeeSurname;
+	document.getElementById("usernameEmp").value = employeeUsername;
+	document.getElementById("nameEmp").value = employeeName;
+	document.getElementById("surnameEmp").value = employeeSurname;
 
-	document.getElementById("employeeIdModal").value = employeeId;
+	document.getElementById("idEmp").value = employeeId;
 
-
-
-	const form = document.getElementById('editEmployeeModal');
+	const form = document.getElementById('formEditEmp');
 	form.action = "/timeTracking/employees/" + employeeId + "/edit";
 
 	showErrorsModal();
@@ -45,10 +43,10 @@ function reloadListEmployees(e) {
 
 	e.preventDefault();
 
-	const form = document.getElementById("editEmployeeModal");
+	const form = document.getElementById("formEditEmp");
 	const url = form.action;
 	const formData = new FormData(form);
-	const id = document.getElementById("employeeIdModal").value;
+	const id = document.getElementById("idEmp").value;
 
 	fetch(url, {
 		method: "POST",
@@ -65,8 +63,8 @@ function reloadListEmployees(e) {
 			} else {
 				return response.json().then(updatedEmployee => {
 
-					const modalElement = document.getElementById("modalEdit");
-					const modalInstance = bootstrap.Modal.getInstance(modalElement);
+					const modalElement = document.getElementById("modalEditEmp");
+					const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
 					modalInstance.hide();
 
 					const row = document.querySelector(`a[data-id="${id}"]`).closest("tr");
@@ -86,39 +84,18 @@ function reloadListEmployees(e) {
 		});
 }
 
-
-
-
-function isEmpty(field) {
-
-	return document.getElementById(field).value.trim() === "";
-
-}
-
-function errorsFormModal(e) {
-
-	if (isEmpty("employeeUsernameModal") || isEmpty("employeeNameModal") || isEmpty("employeeSurnameModal")) {
-		e.preventDefault();
-	}
-
-}
-
 function resetModal() {
-
-	const formModal = document.getElementById("modalEdit");
-	formModal.classList.remove("show", "d-block");
-	formModal.style.display = "none";
-	formModal.removeAttribute("aria-modal");
-	formModal.removeAttribute("role");
+	
+	document.getElementById("formEditEmp").reset();
 
 	document.querySelectorAll(".alert-danger").forEach(alert => {
 		alert.innerHTML = "";
 		alert.style.display = "none";
+		alert.classList.add("d-none");
 	});
 
 }
 
-//document.getElementById("editEmployeeModal").addEventListener('submit', errorsFormModal)
 document.querySelectorAll(".linkEditModal").forEach(link => {
 	link.addEventListener("click", function() {
 		loadDataEdit(this);
@@ -130,4 +107,5 @@ document.getElementById("btnSaveEmp").addEventListener("click", function(e) {
 });
 
 document.getElementById("btnCloseEmp").addEventListener("click", resetModal);
-document.getElementById("modalEdit").addEventListener("hidden.bs.modal", resetModal);
+document.getElementById("modalEditEmp").addEventListener("hidden.bs.modal", resetModal);
+

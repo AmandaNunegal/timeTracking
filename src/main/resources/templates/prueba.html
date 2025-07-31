@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Test carga id en modal</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>Empleado 1</th>
+    <td><button class="linkEditModal" data-id="123">Editar</button></td>
+  </tr>
+  <tr>
+    <th>Empleado 2</th>
+    <td><button class="linkEditModal" data-id="456">Editar</button></td>
+  </tr>
+</table>
+
+<!-- Input oculto -->
+<input type="hidden" id="employeeIdModal" value="" />
+
+<script>
+$(document).ready(function () {
+  $('.linkEditModal').click(function () {
+    const employeeId = $(this).data('id');
+    console.log("Clic en empleado con id:", employeeId);
+    $('#employeeIdModal').val(employeeId);
+
+    // Comprobar que el valor se ha asignado bien
+    console.log("Valor input oculto:", $('#employeeIdModal').val());
+  });
+});
+</script>
+
+</body>
+</html>
